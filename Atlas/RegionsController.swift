@@ -9,7 +9,6 @@
 import UIKit
 import RxSwift
 import RxCocoa
-//import RxJSON
 
 import struct Foundation.URL
 import class Foundation.URLSession
@@ -21,7 +20,7 @@ class RegionsController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView!.dataSource = nil
-        self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "RegionCell")
+        self.navigationController?.navigationBar.topItem?.title = "Regions"
         URLSession.shared.rx.json(url: URL(string: "https://restcountries.eu/rest/v2/all")!)
             .catchErrorJustReturn([])
             .map { json -> [Region] in
@@ -40,7 +39,12 @@ class RegionsController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        let sampleStoryBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+
+        let countriesView  = sampleStoryBoard.instantiateViewController(withIdentifier: "CountriesController") as! CountriesController
+        self.navigationController?.pushViewController(countriesView, animated: true)
+
+
     }
 
 
