@@ -27,7 +27,7 @@ class RegionsController: UITableViewController {
                 guard let items = json as? [[String: Any]] else {
                     return []
                 }
-                self.groupedRegions = Dictionary(grouping: items.filter { !($0["region"] as? String == "") }, by: {$0["region"] as? String ?? ""})
+                self.groupedRegions = Dictionary(grouping: items.filter { !($0["region"] as? String == "") }, by: {$0["region"] as? String ?? ""}) as Dictionary<String, Any>
                 return Array(self.groupedRegions.keys).flatMap(Region.init)
             }
             .bind(to: self.tableView.rx.items) { tableView, row, region in
@@ -39,9 +39,16 @@ class RegionsController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let currentCell = tableView.cellForRow(at: indexPath) as! UITableViewCell
+
         let sampleStoryBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
 
         let countriesView  = sampleStoryBoard.instantiateViewController(withIdentifier: "CountriesController") as! CountriesController
+        
+        let region = currentCell.textLabel?.text
+        
+        countriesView.regionName = region
+        countriesView.countries = self.groupedRegions[region!] as! Array<Dictionary<String, Any>>
         self.navigationController?.pushViewController(countriesView, animated: true)
 
 
