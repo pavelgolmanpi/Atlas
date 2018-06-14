@@ -13,6 +13,6 @@ import SDWebImage
 class CountryFlag: UIImageView{
     
     func setFlag(country: Country){
-        self.sd_setImage(with: URL(string: "http://flags.fmcdn.net/data/flags/h40/" + (country.code.lowercased()) + ".png"), placeholderImage: UIImage(named: "placeholder_flag.png"))
+        self.sd_setImage(with: URL(string: "http://flags.fmcdn.net/data/flags/h40/" + (country.alpha2Code.lowercased()) + ".png"), placeholderImage: UIImage(named: "placeholder_flag.png"))
     }
 }

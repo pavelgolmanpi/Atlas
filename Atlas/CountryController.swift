@@ -16,10 +16,10 @@ class CountryController: UIViewController, UITableViewDataSource, UITableViewDel
     var country: Country!
     
     @IBOutlet weak var flag: CountryFlag!
-    @IBOutlet var name: UILabel!
-    @IBOutlet var nativeName: UILabel!
-    @IBOutlet var labelBordersWith: UILabel!
-    @IBOutlet var tableView: UITableView!
+    @IBOutlet weak var name: UILabel!
+    @IBOutlet weak var nativeName: UILabel!
+    @IBOutlet weak var labelBordersWith: UILabel!
+    @IBOutlet weak var tableView: UITableView!
     
     @IBOutlet var mapView: MKMapView!
     
@@ -33,9 +33,7 @@ class CountryController: UIViewController, UITableViewDataSource, UITableViewDel
         self.tableView!.rowHeight = UITableViewAutomaticDimension
         self.tableView!.estimatedRowHeight = 70.0
         
-        if(self.country.borders.count < 1){
-            self.labelBordersWith.isHidden = true
-        }
+        self.labelBordersWith.isHidden = self.country.borders.count < 1
         
         let annotation = MKPointAnnotation()
         let coordinate = CLLocationCoordinate2D(latitude: CLLocationDegrees(country.lat), longitude: CLLocationDegrees(country.lng))
@@ -45,11 +43,6 @@ class CountryController: UIViewController, UITableViewDataSource, UITableViewDel
         let region = MKCoordinateRegion(center: coordinate, span: MKCoordinateSpan(latitudeDelta: 10, longitudeDelta: 10))
         
         self.mapView.setRegion(region, animated: true)
-        
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -62,8 +55,17 @@ class CountryController: UIViewController, UITableViewDataSource, UITableViewDel
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CountryCell", for: indexPath) as! CountryCell;
-        cell.setParams(country: self.country.borders[indexPath.row])
+        cell.setParams(country: Atlas.shared().countryByAlpha3Code(alpha3Code: self.country.borders[indexPath.row]))
         return cell;
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let sampleStoryBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+        let countryView  = sampleStoryBoard.instantiateViewController(withIdentifier: "CountryController") as! CountryController
+        
+        countryView.country = Atlas.shared().countryByAlpha3Code(alpha3Code: self.country.borders[indexPath.row])
+        
+        self.navigationController?.pushViewController(countryView, animated: true)
     }
 }
 

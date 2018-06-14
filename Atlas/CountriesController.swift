@@ -23,6 +23,7 @@ class CountriesController: UITableViewController {
         self.tableView!.rowHeight = UITableViewAutomaticDimension;
         self.tableView!.estimatedRowHeight = 70.0;
     
+        self.countries = Atlas.shared().countriesByRegion(region: self.regionName)
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
