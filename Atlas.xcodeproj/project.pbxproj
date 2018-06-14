@@ -10,10 +10,13 @@
 		A5BF55A01E8521B21EFC7F46 /* Pods_Atlas.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03DD381A63395691057EBFEF /* Pods_Atlas.framework */; };
 		E915F61F20D10BC5001ADB08 /* CountriesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E915F61E20D10BC4001ADB08 /* CountriesController.swift */; };
 		E944D78020D10DA90026BB78 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E944D77F20D10DA80026BB78 /* Main.storyboard */; };
+		E944D78220D1540A0026BB78 /* CountryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E944D78120D1540A0026BB78 /* CountryCell.swift */; };
 		E9C6FA2F20CFB83700C63B88 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9C6FA2E20CFB83700C63B88 /* AppDelegate.swift */; };
 		E9C6FA3120CFB83700C63B88 /* RegionsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9C6FA3020CFB83700C63B88 /* RegionsController.swift */; };
 		E9C6FA3320CFB83700C63B88 /* SearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9C6FA3220CFB83700C63B88 /* SearchController.swift */; };
 		E9C6FA3820CFB83700C63B88 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E9C6FA3720CFB83700C63B88 /* Assets.xcassets */; };
+		E9CA7C3820D250E5005178FC /* placeholder_flag.png in Resources */ = {isa = PBXBuildFile; fileRef = E9CA7C3720D250E4005178FC /* placeholder_flag.png */; };
+		E9CA7C3A20D253CC005178FC /* CountryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9CA7C3920D253CC005178FC /* CountryController.swift */; };
 		E9DAD9F920D10CB700C87F31 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E9DAD9F720D10CB600C87F31 /* LaunchScreen.storyboard */; };
 		E9E0B1D820CFF94C0048D43C /* Region.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E0B1D720CFF94C0048D43C /* Region.swift */; };
 /* End PBXBuildFile section */
@@ -24,12 +27,15 @@
 		8EDB03AE5749913384D93B78 /* Pods-Atlas.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Atlas.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Atlas/Pods-Atlas.debug.xcconfig"; sourceTree = "<group>"; };
 		E915F61E20D10BC4001ADB08 /* CountriesController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountriesController.swift; sourceTree = "<group>"; };
 		E944D77F20D10DA80026BB78 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		E944D78120D1540A0026BB78 /* CountryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryCell.swift; sourceTree = "<group>"; };
 		E9C6FA2B20CFB83700C63B88 /* Atlas.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Atlas.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E9C6FA2E20CFB83700C63B88 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E9C6FA3020CFB83700C63B88 /* RegionsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegionsController.swift; sourceTree = "<group>"; };
 		E9C6FA3220CFB83700C63B88 /* SearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchController.swift; sourceTree = "<group>"; };
 		E9C6FA3720CFB83700C63B88 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E9C6FA3C20CFB83700C63B88 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E9CA7C3720D250E4005178FC /* placeholder_flag.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = placeholder_flag.png; path = Assets.xcassets/placeholder_flag.png; sourceTree = "<group>"; };
+		E9CA7C3920D253CC005178FC /* CountryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryController.swift; sourceTree = "<group>"; };
 		E9DAD9F720D10CB600C87F31 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E9E0B1D720CFF94C0048D43C /* Region.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Region.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -86,14 +92,17 @@
 			isa = PBXGroup;
 			children = (
 				E944D77F20D10DA80026BB78 /* Main.storyboard */,
+				E944D78120D1540A0026BB78 /* CountryCell.swift */,
 				E9DAD9F720D10CB600C87F31 /* LaunchScreen.storyboard */,
 				E915F61E20D10BC4001ADB08 /* CountriesController.swift */,
 				E9C6FA2E20CFB83700C63B88 /* AppDelegate.swift */,
 				E9C6FA3020CFB83700C63B88 /* RegionsController.swift */,
 				E9C6FA3220CFB83700C63B88 /* SearchController.swift */,
 				E9C6FA3720CFB83700C63B88 /* Assets.xcassets */,
+				E9CA7C3720D250E4005178FC /* placeholder_flag.png */,
 				E9C6FA3C20CFB83700C63B88 /* Info.plist */,
 				E9E0B1D720CFF94C0048D43C /* Region.swift */,
+				E9CA7C3920D253CC005178FC /* CountryController.swift */,
 			);
 			path = Atlas;
 			sourceTree = "<group>";
@@ -169,6 +178,7 @@
 				E944D78020D10DA90026BB78 /* Main.storyboard in Resources */,
 				E9DAD9F920D10CB700C87F31 /* LaunchScreen.storyboard in Resources */,
 				E9C6FA3820CFB83700C63B88 /* Assets.xcassets in Resources */,
+				E9CA7C3820D250E5005178FC /* placeholder_flag.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -201,14 +211,14 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Atlas/Pods-Atlas-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
-				"${BUILT_PRODUCTS_DIR}/RxJSON/RxJSON.framework",
 				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxJSON.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -224,6 +234,8 @@
 			files = (
 				E915F61F20D10BC5001ADB08 /* CountriesController.swift in Sources */,
 				E9C6FA3320CFB83700C63B88 /* SearchController.swift in Sources */,
+				E944D78220D1540A0026BB78 /* CountryCell.swift in Sources */,
+				E9CA7C3A20D253CC005178FC /* CountryController.swift in Sources */,
 				E9C6FA2F20CFB83700C63B88 /* AppDelegate.swift in Sources */,
 				E9C6FA3120CFB83700C63B88 /* RegionsController.swift in Sources */,
 				E9E0B1D820CFF94C0048D43C /* Region.swift in Sources */,

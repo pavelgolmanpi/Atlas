@@ -20,11 +20,9 @@ class CountriesController: UITableViewController {
         self.tableView!.dataSource = self
         
         self.title = self.regionName
+        self.tableView!.rowHeight = UITableViewAutomaticDimension;
+        self.tableView!.estimatedRowHeight = 70.0;
     
-    }
-    
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -36,9 +34,26 @@ class CountriesController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "CountryCell", for: indexPath);
-        cell.textLabel?.text = self.countries[indexPath.row]["name"] as? String
+        let cell = tableView.dequeueReusableCell(withIdentifier: "CountryCell", for: indexPath) as! CountryCell;
+        cell.setParams(params: self.countries[indexPath.row])
         return cell;
+    }
+    
+    
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let currentCell = tableView.cellForRow(at: indexPath) as! UITableViewCell
+        
+        let sampleStoryBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+        
+        let countryView  = sampleStoryBoard.instantiateViewController(withIdentifier: "CountryController") as! CountryController
+        
+        countryView.country = self.countries[indexPath.row]
+        
+        let borders = countryView.country["borders"] as? Array<String>
+        countryView.borders = self.countries.filter { (borders?.contains($0["alpha3Code"] as! String))! }
+        
+        self.navigationController?.pushViewController(countryView, animated: true)
     }
 }
 
