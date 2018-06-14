@@ -8,21 +8,16 @@
 
 import Foundation
 import UIKit
-import SDWebImage
 
 class CountryCell: UITableViewCell {
     
-    @IBOutlet weak var flag: UIImageView!
+    @IBOutlet weak var flag: CountryFlag!
     @IBOutlet var name: UILabel!
     @IBOutlet var nativeName: UILabel!
     
-    func setParams(params: Dictionary<String, Any>){
-        self.name.text = params["name"] as? String
-        self.nativeName.text = params["nativeName"] as? String
-        
-        let code = params["alpha2Code"] as? String
-        
-        self.flag.sd_setImage(with: URL(string: "http://flags.fmcdn.net/data/flags/h40/" + (code?.lowercased())! + ".png"), placeholderImage: UIImage(named: "placeholder_flag.png"))
-        
+    func setParams(country: Country){
+        self.name.text = country.name
+        self.nativeName.text = country.nativeName
+        self.flag.setFlag(country: country)
     }
 }

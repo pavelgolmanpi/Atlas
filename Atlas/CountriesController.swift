@@ -12,7 +12,7 @@ import RxCocoa
 
 class CountriesController: UITableViewController {
     
-    var countries: Array<Dictionary <String, Any>>!
+    var countries: Array<Country>!
     var regionName: String!
     
     override func viewDidLoad() {
@@ -35,23 +35,16 @@ class CountriesController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CountryCell", for: indexPath) as! CountryCell;
-        cell.setParams(params: self.countries[indexPath.row])
+        cell.setParams(country: self.countries[indexPath.row])
         return cell;
     }
     
-    
-    
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let currentCell = tableView.cellForRow(at: indexPath) as! UITableViewCell
-        
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {        
         let sampleStoryBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
         
         let countryView  = sampleStoryBoard.instantiateViewController(withIdentifier: "CountryController") as! CountryController
         
         countryView.country = self.countries[indexPath.row]
-        
-        let borders = countryView.country["borders"] as? Array<String>
-        countryView.borders = self.countries.filter { (borders?.contains($0["alpha3Code"] as! String))! }
         
         self.navigationController?.pushViewController(countryView, animated: true)
     }

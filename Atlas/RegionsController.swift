@@ -48,10 +48,9 @@ class RegionsController: UITableViewController {
         let region = currentCell.textLabel?.text
         
         countriesView.regionName = region
-        countriesView.countries = self.groupedRegions[region!] as! Array<Dictionary<String, Any>>
+        let allCountries = self.groupedRegions[region!] as! Array<Dictionary<String, Any>>
+        countriesView.countries = allCountries.map{ (params) in return Country(params: params, allCountries: allCountries) }
         self.navigationController?.pushViewController(countriesView, animated: true)
-
-
     }
 
 

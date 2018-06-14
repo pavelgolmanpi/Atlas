@@ -17,6 +17,8 @@
 		E9C6FA3820CFB83700C63B88 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E9C6FA3720CFB83700C63B88 /* Assets.xcassets */; };
 		E9CA7C3820D250E5005178FC /* placeholder_flag.png in Resources */ = {isa = PBXBuildFile; fileRef = E9CA7C3720D250E4005178FC /* placeholder_flag.png */; };
 		E9CA7C3A20D253CC005178FC /* CountryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9CA7C3920D253CC005178FC /* CountryController.swift */; };
+		E9CA7C3C20D274DB005178FC /* Country.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9CA7C3B20D274DB005178FC /* Country.swift */; };
+		E9CA7C3E20D29252005178FC /* CountryFlag.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9CA7C3D20D29252005178FC /* CountryFlag.swift */; };
 		E9DAD9F920D10CB700C87F31 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E9DAD9F720D10CB600C87F31 /* LaunchScreen.storyboard */; };
 		E9E0B1D820CFF94C0048D43C /* Region.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E0B1D720CFF94C0048D43C /* Region.swift */; };
 /* End PBXBuildFile section */
@@ -36,6 +38,8 @@
 		E9C6FA3C20CFB83700C63B88 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E9CA7C3720D250E4005178FC /* placeholder_flag.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = placeholder_flag.png; path = Assets.xcassets/placeholder_flag.png; sourceTree = "<group>"; };
 		E9CA7C3920D253CC005178FC /* CountryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryController.swift; sourceTree = "<group>"; };
+		E9CA7C3B20D274DB005178FC /* Country.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Country.swift; sourceTree = "<group>"; };
+		E9CA7C3D20D29252005178FC /* CountryFlag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryFlag.swift; sourceTree = "<group>"; };
 		E9DAD9F720D10CB600C87F31 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E9E0B1D720CFF94C0048D43C /* Region.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Region.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -103,6 +107,8 @@
 				E9C6FA3C20CFB83700C63B88 /* Info.plist */,
 				E9E0B1D720CFF94C0048D43C /* Region.swift */,
 				E9CA7C3920D253CC005178FC /* CountryController.swift */,
+				E9CA7C3B20D274DB005178FC /* Country.swift */,
+				E9CA7C3D20D29252005178FC /* CountryFlag.swift */,
 			);
 			path = Atlas;
 			sourceTree = "<group>";
@@ -233,9 +239,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				E915F61F20D10BC5001ADB08 /* CountriesController.swift in Sources */,
+				E9CA7C3E20D29252005178FC /* CountryFlag.swift in Sources */,
 				E9C6FA3320CFB83700C63B88 /* SearchController.swift in Sources */,
 				E944D78220D1540A0026BB78 /* CountryCell.swift in Sources */,
 				E9CA7C3A20D253CC005178FC /* CountryController.swift in Sources */,
+				E9CA7C3C20D274DB005178FC /* Country.swift in Sources */,
 				E9C6FA2F20CFB83700C63B88 /* AppDelegate.swift in Sources */,
 				E9C6FA3120CFB83700C63B88 /* RegionsController.swift in Sources */,
 				E9E0B1D820CFF94C0048D43C /* Region.swift in Sources */,
