@@ -20,8 +20,9 @@ class RegionsController: UITableViewController {
         self.tableView!.dataSource = nil
         self.navigationController?.navigationBar.topItem?.title = "Regions"
         
+        
         Atlas.shared()
-            .load()
+            .regions()
             .bind(to: self.tableView.rx.items) { tableView, row, region in
                 let cell = tableView.dequeueReusableCell(withIdentifier: "RegionCell")!
                 cell.textLabel!.text = region
@@ -33,9 +34,7 @@ class RegionsController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let currentCell = tableView.cellForRow(at: indexPath) as! UITableViewCell
 
-        let sampleStoryBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-
-        let countriesView  = sampleStoryBoard.instantiateViewController(withIdentifier: "CountriesController") as! CountriesController
+        let countriesView  = UIStoryboard(name: "Main", bundle:nil).instantiateViewController(withIdentifier: "CountriesController") as! CountriesController
         
         countriesView.regionName = currentCell.textLabel?.text
         

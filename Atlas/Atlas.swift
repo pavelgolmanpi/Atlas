@@ -12,36 +12,46 @@ import RxCocoa
 
 class Atlas{
     
-    var countries: Array<Country>!
+    var countries: Observable<[Country]>!
     
     static let sharedAtlas = Atlas()
+    fileprivate let disposeBag = DisposeBag()
     
-    private init() {}
+    private init() {
+        
+        self.load()
+    }
     
     class func shared() -> Atlas {
         return sharedAtlas
     }
     
-    func load() -> RxSwift.Observable<[String]>{
-        return URLSession.shared.rx.json(url: URL(string: "https://restcountries.eu/rest/v2/all")!)
+    func load(){
+        self.countries = URLSession.shared.rx.json(url: URL(string: "https://restcountries.eu/rest/v2/all")!)
             .catchErrorJustReturn([])
-            .map { json -> [String] in
+            .map { json -> [Country] in
                 guard let items = json as? [[String: Any]] else {
                     return []
                 }
                 
-                self.countries = items.filter { !($0["region"] as? String == "") }.map{ (params) in return Country(params: params) }
-                
-                return NSSet(array: self.countries.map{ (country) in return country.region }).flatMap { $0 as? String }
-        }
+                return items.filter { !($0["region"] as? String == "") }.map{ (params) in return Country(params: params)}
+            }
     }
     
-    func countriesByRegion(region: String) -> Array<Country>{
-        return self.countries.filter{ $0.region == region }
+    func regions() -> Observable<[String]>{
+        return self.countries.map{ countries in NSSet(array: countries.map{ (country) in return country.region }).flatMap { $0 as? String } }
     }
     
-    func countryByAlpha3Code(alpha3Code: String) -> Country{
-        return self.countries.first(where: { $0.alpha3Code == alpha3Code })!
-    }
+    //func countriesByRegion(region: String) -> Observable<Country>{
+    //    return self.countries.filter{ $0.region == region }
+    //}
+    
+    //func countriesByName(name: String) -> Observable<Country>{
+    //    return self.countries.filter{ $0.name.range(of: name) != nil }
+    //}
+    
+    //func countryByAlpha3Code(alpha3Code: String) -> Country{
+    //    return null;//self.countries.first(where: { $0.alpha3Code == alpha3Code })!
+    //}
 }
 

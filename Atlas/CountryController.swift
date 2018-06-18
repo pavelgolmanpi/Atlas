@@ -34,6 +34,7 @@ class CountryController: UIViewController, UITableViewDataSource, UITableViewDel
         self.tableView!.estimatedRowHeight = 70.0
         
         self.labelBordersWith.isHidden = self.country.borders.count < 1
+        self.tableView.isHidden = self.labelBordersWith.isHidden
         
         let annotation = MKPointAnnotation()
         let coordinate = CLLocationCoordinate2D(latitude: CLLocationDegrees(country.lat), longitude: CLLocationDegrees(country.lng))
@@ -55,15 +56,14 @@ class CountryController: UIViewController, UITableViewDataSource, UITableViewDel
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CountryCell", for: indexPath) as! CountryCell;
-        cell.setParams(country: Atlas.shared().countryByAlpha3Code(alpha3Code: self.country.borders[indexPath.row]))
+        //cell.setParams(country: Atlas.shared().countryByAlpha3Code(alpha3Code: self.country.borders[indexPath.row]))
         return cell;
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let sampleStoryBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-        let countryView  = sampleStoryBoard.instantiateViewController(withIdentifier: "CountryController") as! CountryController
+        let countryView  = UIStoryboard(name: "Main", bundle:nil).instantiateViewController(withIdentifier: "CountryController") as! CountryController
         
-        countryView.country = Atlas.shared().countryByAlpha3Code(alpha3Code: self.country.borders[indexPath.row])
+        //countryView.country = Atlas.shared().countryByAlpha3Code(alpha3Code: self.country.borders[indexPath.row])
         
         self.navigationController?.pushViewController(countryView, animated: true)
     }
