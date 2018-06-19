@@ -31,11 +31,11 @@ class RegionsController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let currentCell = tableView.cellForRow(at: indexPath) as! UITableViewCell
+        let currentCell = tableView.cellForRow(at: indexPath) as UITableViewCell?
 
         let countriesView  = UIStoryboard(name: "Main", bundle:nil).instantiateViewController(withIdentifier: "CountriesController") as! CountriesController
         
-        countriesView.setRegionName(name: (currentCell.textLabel?.text)!)
+        countriesView.setRegionName(name: (currentCell?.textLabel?.text)!)
         
         self.navigationController?.pushViewController(countriesView, animated: true)
     }

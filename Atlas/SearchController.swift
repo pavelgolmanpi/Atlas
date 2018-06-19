@@ -16,8 +16,11 @@ class SearchController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.navigationBar.topItem?.title = "Search"
+        
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
+        searchController.hidesNavigationBarDuringPresentation = false
         navigationItem.searchController = searchController
         definesPresentationContext = true
         
@@ -38,7 +41,7 @@ class SearchController: UIViewController {
     }
     
     func filterContentForSearchText(_ searchText: String, scope: String = "All") {
-        //self.tableView.countries = Atlas.shared().countriesByName(name: searchText)
+        self.tableView.setCountries(list: Atlas.shared().countriesByName(name: searchText))
         self.tableView.reloadData()
     }
     
@@ -58,7 +61,7 @@ extension SearchController: UISearchBarDelegate {
 extension SearchController: UISearchResultsUpdating {
     // MARK: - UISearchResultsUpdating Delegate
     func updateSearchResults(for searchController: UISearchController) {
-        let searchBar = searchController.searchBar
+        //let searchBar = searchController.searchBar
         //let scope = searchBar.scopeButtonTitles![searchBar.selectedScopeButtonIndex]
         filterContentForSearchText(searchController.searchBar.text!, scope: "")
     }

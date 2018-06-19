@@ -26,6 +26,8 @@ class CountryController: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = self.country.name
+        self.navigationController?.isNavigationBarHidden = false
+        
         self.name.text = self.country.name
         self.nativeName.text = self.country.nativeName
         self.flag.setFlag(country: self.country)

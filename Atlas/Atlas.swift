@@ -46,9 +46,9 @@ class Atlas{
         return self.countries.map { countries in countries.filter{ $0.region == region } }
     }
     
-    //func countriesByName(name: String) -> Observable<Country>{
-    //    return self.countries.filter{ $0.name.range(of: name) != nil }
-    //}
+    func countriesByName(name: String) -> Observable<[Country]>{
+        return self.countries.map { countries in countries.filter{ $0.name.range(of: name) != nil } }
+    }
     
     func countryByAlpha3Code(codes: [String]) -> Observable<[Country]>{
         return self.countries.map { countries in countries.filter{codes.contains($0.alpha3Code)  } }
