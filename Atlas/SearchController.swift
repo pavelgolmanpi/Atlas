@@ -27,9 +27,6 @@ class SearchController: UIViewController {
         searchController.searchBar.delegate = self
         searchController.searchBar.placeholder = "Search"
         
-        self.tableView!.rowHeight = UITableViewAutomaticDimension;
-        self.tableView!.estimatedRowHeight = 70.0;
-        
         self.tableView.parentController = self
         
         self.tableView.tableHeaderView = searchController.searchBar
@@ -41,7 +38,7 @@ class SearchController: UIViewController {
     }
     
     func filterContentForSearchText(_ searchText: String, scope: String = "All") {
-        self.tableView.setCountries(list: Atlas.shared().countriesByName(name: searchText))
+        self.tableView.setParams(list: Atlas.shared().countriesByName(name: searchText))
         self.tableView.reloadData()
     }
     

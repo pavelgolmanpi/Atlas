@@ -48,7 +48,7 @@ class CountryController: UIViewController{
         self.mapView.setRegion(region, animated: true)
         
         self.tableView.parentController = self
-        self.tableView.setCountries(list: Atlas.shared().countryByAlpha3Code(codes: country.borders))
+        self.tableView.setParams(list: Atlas.shared().countryByAlpha3Code(codes: country.borders))
     }
 }
 

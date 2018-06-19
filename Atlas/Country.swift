@@ -28,9 +28,7 @@ class Country{
         self.nativeName = params["nativeName"] as! String
         self.alpha2Code = params["alpha2Code"] as! String
         self.alpha3Code = params["alpha3Code"] as! String
-        
-        //self.borders = allCountries.filter { ((params["borders"] as! Array<String>).contains($0["alpha3Code"] as! String)) }.map{ (params) in return Country(params: params, allCountries: []) }
-        
+                
         self.borders = params["borders"] as! Array<String>
         
         let latlng = params["latlng"] as! Array<Float?>

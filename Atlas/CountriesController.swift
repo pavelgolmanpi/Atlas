@@ -15,16 +15,13 @@ class CountriesController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.tableView!.rowHeight = UITableViewAutomaticDimension;
-        self.tableView!.estimatedRowHeight = 70.0;
-    
         (self.tableView as! CountriesTableView).parentController = self
     }
     
     func setRegionName(name: String){
         self.regionName = name
         self.title = self.regionName
-        (self.tableView as! CountriesTableView).setCountries(list: Atlas.shared().countriesByRegion(region: self.regionName))
+        (self.tableView as! CountriesTableView).setParams(list: Atlas.shared().countriesByRegion(region: self.regionName))
     }
 }
 

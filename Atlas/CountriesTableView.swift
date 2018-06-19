@@ -16,7 +16,10 @@ class CountriesTableView: UITableView, UITableViewDelegate{
     var list: Observable<[Country]>!
     var parentController: UIViewController!
     
-    func setCountries(list: Observable<[Country]>){
+    func setParams(list: Observable<[Country]>){
+        self.rowHeight = UITableViewAutomaticDimension;
+        self.estimatedRowHeight = 70.0;
+        
         self.dataSource = nil
         self.delegate = self
         self.list = list
