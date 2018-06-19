@@ -11,11 +11,14 @@ import UIKit
 
 class CountryCell: UITableViewCell {
     
+    public var country: Country!
+    
     @IBOutlet weak var flag: CountryFlag!
     @IBOutlet var name: UILabel!
     @IBOutlet var nativeName: UILabel!
     
     func setParams(country: Country){
+        self.country = country
         self.name.text = country.name
         self.nativeName.text = country.nativeName
         self.flag.setFlag(country: country)

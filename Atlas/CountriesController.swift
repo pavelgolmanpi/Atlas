@@ -10,18 +10,21 @@ import UIKit
 
 class CountriesController: UITableViewController {
     
-    var regionName: String!
+    private var regionName: String!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.title = self.regionName
         self.tableView!.rowHeight = UITableViewAutomaticDimension;
         self.tableView!.estimatedRowHeight = 70.0;
     
-        //(self.tableView as! CountriesTableView).countries = Atlas.shared().countriesByRegion(region:
-        //    self.regionName)
         (self.tableView as! CountriesTableView).parentController = self
+    }
+    
+    func setRegionName(name: String){
+        self.regionName = name
+        self.title = self.regionName
+        (self.tableView as! CountriesTableView).setCountries(list: Atlas.shared().countriesByRegion(region: self.regionName))
     }
 }
 

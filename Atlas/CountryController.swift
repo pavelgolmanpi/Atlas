@@ -11,7 +11,7 @@ import RxSwift
 import RxCocoa
 import MapKit
 
-class CountryController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class CountryController: UIViewController{
     
     var country: Country!
     
@@ -19,7 +19,7 @@ class CountryController: UIViewController, UITableViewDataSource, UITableViewDel
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var nativeName: UILabel!
     @IBOutlet weak var labelBordersWith: UILabel!
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var tableView: CountriesTableView!
     
     @IBOutlet var mapView: MKMapView!
     
@@ -44,28 +44,9 @@ class CountryController: UIViewController, UITableViewDataSource, UITableViewDel
         let region = MKCoordinateRegion(center: coordinate, span: MKCoordinateSpan(latitudeDelta: 10, longitudeDelta: 10))
         
         self.mapView.setRegion(region, animated: true)
-    }
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.country.borders.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "CountryCell", for: indexPath) as! CountryCell;
-        //cell.setParams(country: Atlas.shared().countryByAlpha3Code(alpha3Code: self.country.borders[indexPath.row]))
-        return cell;
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let countryView  = UIStoryboard(name: "Main", bundle:nil).instantiateViewController(withIdentifier: "CountryController") as! CountryController
         
-        //countryView.country = Atlas.shared().countryByAlpha3Code(alpha3Code: self.country.borders[indexPath.row])
-        
-        self.navigationController?.pushViewController(countryView, animated: true)
+        self.tableView.parentController = self
+        self.tableView.setCountries(list: Atlas.shared().countryByAlpha3Code(codes: country.borders))
     }
 }
 

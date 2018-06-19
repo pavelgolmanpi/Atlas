@@ -244,7 +244,7 @@
                                             <constraint firstItem="PPe-NQ-tRR" firstAttribute="top" secondItem="NQ8-Wg-l27" secondAttribute="bottom" constant="5" id="zD4-KP-NFr"/>
                                         </constraints>
                                     </view>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="TJT-wg-gpP">
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="TJT-wg-gpP" customClass="CountriesTableView" customModule="Atlas" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="400" width="375" height="128"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
@@ -298,10 +298,6 @@
                                             </tableViewCell>
                                         </prototypes>
                                         <sections/>
-                                        <connections>
-                                            <outlet property="dataSource" destination="Ipu-5b-LgS" id="7b4-m0-1dj"/>
-                                            <outlet property="delegate" destination="Ipu-5b-LgS" id="Pyx-ma-jOw"/>
-                                        </connections>
                                     </tableView>
                                 </subviews>
                                 <constraints>

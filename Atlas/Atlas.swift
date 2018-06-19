@@ -42,16 +42,16 @@ class Atlas{
         return self.countries.map{ countries in NSSet(array: countries.map{ (country) in return country.region }).flatMap { $0 as? String } }
     }
     
-    //func countriesByRegion(region: String) -> Observable<Country>{
-    //    return self.countries.filter{ $0.region == region }
-    //}
+    func countriesByRegion(region: String) -> Observable<[Country]>{
+        return self.countries.map { countries in countries.filter{ $0.region == region } }
+    }
     
     //func countriesByName(name: String) -> Observable<Country>{
     //    return self.countries.filter{ $0.name.range(of: name) != nil }
     //}
     
-    //func countryByAlpha3Code(alpha3Code: String) -> Country{
-    //    return null;//self.countries.first(where: { $0.alpha3Code == alpha3Code })!
-    //}
+    func countryByAlpha3Code(codes: [String]) -> Observable<[Country]>{
+        return self.countries.map { countries in countries.filter{codes.contains($0.alpha3Code)  } }
+    }
 }
 

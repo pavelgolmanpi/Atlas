@@ -20,7 +20,6 @@ class RegionsController: UITableViewController {
         self.tableView!.dataSource = nil
         self.navigationController?.navigationBar.topItem?.title = "Regions"
         
-        
         Atlas.shared()
             .regions()
             .bind(to: self.tableView.rx.items) { tableView, row, region in
@@ -36,7 +35,7 @@ class RegionsController: UITableViewController {
 
         let countriesView  = UIStoryboard(name: "Main", bundle:nil).instantiateViewController(withIdentifier: "CountriesController") as! CountriesController
         
-        countriesView.regionName = currentCell.textLabel?.text
+        countriesView.setRegionName(name: (currentCell.textLabel?.text)!)
         
         self.navigationController?.pushViewController(countriesView, animated: true)
     }
