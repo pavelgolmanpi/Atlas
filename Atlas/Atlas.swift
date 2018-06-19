@@ -12,7 +12,8 @@ import RxCocoa
 
 class Atlas{
     
-    var countries: Observable<[Country]>!
+    private var countries: Variable<[Country]> = Variable([])
+    private var countriesObservable: Observable<[Country]> = Observable.from([])
     
     static let sharedAtlas = Atlas()
     fileprivate let disposeBag = DisposeBag()
@@ -27,31 +28,33 @@ class Atlas{
     }
     
     func load(){
-        self.countries = URLSession.shared.rx.json(url: URL(string: "https://restcountries.eu/rest/v2/all")!)
+        self.countriesObservable = self.countries.asObservable()
+        
+        URLSession.shared.rx.json(url: URL(string: "https://restcountries.eu/rest/v2/all")!)
             .catchErrorJustReturn([])
-            .map { json -> [Country] in
+            .subscribe(onNext: { json in
                 guard let items = json as? [[String: Any]] else {
-                    return []
+                    return
                 }
                 
-                return items.filter { !($0["region"] as? String == "") }.map{ (params) in return Country(params: params)}
-            }
+                self.countries.value = items.filter { !($0["region"] as? String == "") }.map{ (params) in return Country(params: params)}
+            })
     }
     
     func regions() -> Observable<[String]>{
-        return self.countries.map{ countries in NSSet(array: countries.map{ (country) in return country.region }).flatMap { $0 as? String } }
+        return self.countriesObservable.map{ countries in NSSet(array: countries.map{ (country) in return country.region }).flatMap { $0 as? String } }
     }
     
     func countriesByRegion(region: String) -> Observable<[Country]>{
-        return self.countries.map { countries in countries.filter{ $0.region == region } }
+        return self.countriesObservable.map { countries in countries.filter{ $0.region == region } }
     }
     
     func countriesByName(name: String) -> Observable<[Country]>{
-        return self.countries.map { countries in countries.filter{ $0.name.range(of: name) != nil } }
+        return self.countriesObservable.map { countries in countries.filter{ $0.name.range(of: name) != nil } }
     }
     
     func countryByAlpha3Code(codes: [String]) -> Observable<[Country]>{
-        return self.countries.map { countries in countries.filter{codes.contains($0.alpha3Code)  } }
+        return self.countriesObservable.map { countries in countries.filter{codes.contains($0.alpha3Code)  } }
     }
 }
 
