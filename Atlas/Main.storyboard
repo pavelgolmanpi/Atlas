@@ -81,7 +81,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="O1u-W8-tvY"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Search" image="second" id="cPa-gy-q4n"/>
+                    <tabBarItem key="tabBarItem" title="Search" image="search.png" selectedImage="search.png" id="cPa-gy-q4n"/>
                     <connections>
                         <outlet property="tableView" destination="I7Y-3C-fQq" id="Nxv-US-Tha"/>
                         <outlet property="view" destination="QS5-Rx-YEW" id="qZ1-8D-ixJ"/>
@@ -114,7 +114,7 @@
                             <outlet property="delegate" destination="Pgk-Wx-kRg" id="nMI-WI-yQe"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" title="Regions" id="WW7-HP-0of"/>
+                    <tabBarItem key="tabBarItem" title="Regions" image="globe.png" selectedImage="globe.png" id="WW7-HP-0of"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ryf-hv-pRR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -372,6 +372,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="second" width="30" height="30"/>
+        <image name="globe.png" width="30" height="30"/>
+        <image name="search.png" width="30" height="30"/>
     </resources>
 </document>

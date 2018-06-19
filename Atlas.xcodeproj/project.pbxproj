@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		A5BF55A01E8521B21EFC7F46 /* Pods_Atlas.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03DD381A63395691057EBFEF /* Pods_Atlas.framework */; };
 		E915F61F20D10BC5001ADB08 /* CountriesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E915F61E20D10BC4001ADB08 /* CountriesController.swift */; };
+		E92D4EF920D8F715000F7AE6 /* globe.png in Resources */ = {isa = PBXBuildFile; fileRef = E92D4EF820D8F714000F7AE6 /* globe.png */; };
+		E92D4EFB20D8F997000F7AE6 /* search.png in Resources */ = {isa = PBXBuildFile; fileRef = E92D4EFA20D8F997000F7AE6 /* search.png */; };
 		E944D78020D10DA90026BB78 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E944D77F20D10DA80026BB78 /* Main.storyboard */; };
 		E944D78220D1540A0026BB78 /* CountryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E944D78120D1540A0026BB78 /* CountryCell.swift */; };
 		E9C6FA2F20CFB83700C63B88 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9C6FA2E20CFB83700C63B88 /* AppDelegate.swift */; };
@@ -29,6 +31,8 @@
 		46FE4619976C2B6F57F64A7E /* Pods-Atlas.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Atlas.release.xcconfig"; path = "Pods/Target Support Files/Pods-Atlas/Pods-Atlas.release.xcconfig"; sourceTree = "<group>"; };
 		8EDB03AE5749913384D93B78 /* Pods-Atlas.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Atlas.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Atlas/Pods-Atlas.debug.xcconfig"; sourceTree = "<group>"; };
 		E915F61E20D10BC4001ADB08 /* CountriesController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountriesController.swift; sourceTree = "<group>"; };
+		E92D4EF820D8F714000F7AE6 /* globe.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = globe.png; path = Assets.xcassets/globe.png; sourceTree = "<group>"; };
+		E92D4EFA20D8F997000F7AE6 /* search.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = search.png; path = Assets.xcassets/search.png; sourceTree = "<group>"; };
 		E944D77F20D10DA80026BB78 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		E944D78120D1540A0026BB78 /* CountryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryCell.swift; sourceTree = "<group>"; };
 		E9C6FA2B20CFB83700C63B88 /* Atlas.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Atlas.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -97,6 +101,7 @@
 		E9C6FA2D20CFB83700C63B88 /* Atlas */ = {
 			isa = PBXGroup;
 			children = (
+				E92D4EFA20D8F997000F7AE6 /* search.png */,
 				E944D77F20D10DA80026BB78 /* Main.storyboard */,
 				E944D78120D1540A0026BB78 /* CountryCell.swift */,
 				E9DAD9F720D10CB600C87F31 /* LaunchScreen.storyboard */,
@@ -105,6 +110,7 @@
 				E9C6FA3020CFB83700C63B88 /* RegionsController.swift */,
 				E9C6FA3220CFB83700C63B88 /* SearchController.swift */,
 				E9C6FA3720CFB83700C63B88 /* Assets.xcassets */,
+				E92D4EF820D8F714000F7AE6 /* globe.png */,
 				E9CA7C3720D250E4005178FC /* placeholder_flag.png */,
 				E9C6FA3C20CFB83700C63B88 /* Info.plist */,
 				E9CA7C3920D253CC005178FC /* CountryController.swift */,
@@ -184,6 +190,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E92D4EF920D8F715000F7AE6 /* globe.png in Resources */,
+				E92D4EFB20D8F997000F7AE6 /* search.png in Resources */,
 				E944D78020D10DA90026BB78 /* Main.storyboard in Resources */,
 				E9DAD9F920D10CB700C87F31 /* LaunchScreen.storyboard in Resources */,
 				E9C6FA3820CFB83700C63B88 /* Assets.xcassets in Resources */,
