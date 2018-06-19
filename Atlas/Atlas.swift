@@ -12,7 +12,7 @@ import RxCocoa
 
 class Atlas{
     
-    private var countries: Variable<[Country]> = Variable([])
+    private var countries: BehaviorRelay<[Country]> = BehaviorRelay(value: [])
     private var countriesObservable: Observable<[Country]> = Observable.from([])
     
     static let sharedAtlas = Atlas()
@@ -37,7 +37,7 @@ class Atlas{
                     return
                 }
                 
-                self.countries.value = items.filter { !($0["region"] as? String == "") }.map{ (params) in return Country(params: params)}
+                self.countries.accept(items.filter { !($0["region"] as? String == "") }.map{ (params) in return Country(params: params)})
             })
     }
     
