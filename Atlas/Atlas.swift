@@ -30,15 +30,19 @@ class Atlas{
     func load(){
         self.countriesObservable = self.countries.asObservable()
         
-        URLSession.shared.rx.json(url: URL(string: "https://restcountries.eu/rest/v2/all")!)
-            .catchErrorJustReturn([])
-            .subscribe(onNext: { json in
-                guard let items = json as? [[String: Any]] else {
-                    return
-                }
+        guard let gitUrl = URL(string: "https://restcountries.eu/rest/v2/all") else { return }
+        URLSession.shared.dataTask(with: gitUrl) { (data, response
+            , error) in
+            guard let data = data else { return }
+            do {
+                let decoder = JSONDecoder()
+                let items = try decoder.decode([Country].self, from: data)
                 
-                self.countries.accept(items.filter { !($0["region"] as? String == "") }.map{ (params) in return Country(params: params)})
-            })
+                self.countries.accept(items.filter { $0.region != "" })
+            } catch let err {
+                //print("Err", err)
+            }
+            }.resume()
     }
     
     func regions() -> Observable<[String]>{
