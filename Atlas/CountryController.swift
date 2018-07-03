@@ -30,7 +30,6 @@ class CountryController: UIViewController, UITableViewDelegate{
         self.name.text = self.country.name
         self.nativeName.text = self.country.nativeName
         self.flag.setCountry(country: self.country)
-        self.tableView.dataSource = nil
         self.tableView.delegate = self
         
         self.labelBordersWith.isHidden = self.country.borders.count < 1
@@ -44,17 +43,11 @@ class CountryController: UIViewController, UITableViewDelegate{
         let region = MKCoordinateRegion(center: coordinate, span: MKCoordinateSpan(latitudeDelta: 10, longitudeDelta: 10))
         self.mapView.setRegion(region, animated: true)
         
-        
-        Atlas.shared().countryByAlpha3Code(codes: country.borders).bind(to: self.tableView.rx.items) { tableView, row, country in
-            let cell = self.tableView.dequeueReusableCell(withIdentifier: "CountryCell") as! CountryCell
-            cell.setParams(country: country)
-            return cell
-        }
+        self.tableView.setCountries(countries: Atlas.shared().countryByAlpha3Code(codes: country.borders))
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let cell = tableView.cellForRow(at: indexPath) as! CountryCell
-        self.showCountryCountroller(country: cell.country)
+        self.didSelectCountry(tableView: tableView, indexPath: indexPath)
     }
 }
 

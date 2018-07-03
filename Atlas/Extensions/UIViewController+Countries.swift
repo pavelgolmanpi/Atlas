@@ -9,7 +9,7 @@
 import UIKit
 
 extension UIViewController {
-    
+
     func showCountryCountroller(country: Country){
         let countryVC  = UIStoryboard(name: "Main", bundle:nil).instantiateViewController(withIdentifier: "CountryController") as! CountryController
         countryVC.country = country
