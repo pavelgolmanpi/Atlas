@@ -12,16 +12,13 @@ import RxCocoa
 
 class CountriesController: UITableViewController {
     
-    private var regionName: String!
-    
     override func viewDidLoad() {
         self.tableView.delegate = self
     }
     
     func setRegionName(name: String){
-        self.regionName = name
-        self.title = self.regionName
-        self.tableView.setCountries(countries: Atlas.shared().countriesByRegion(region: self.regionName))        
+        self.title = name
+        self.tableView.setCountries(countries: Atlas.shared().countriesByRegion(region: self.title!))        
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
