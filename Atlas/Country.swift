@@ -29,14 +29,14 @@ struct Country: Codable{
     }
     
     func lat() -> Double {
-        guard self.latlng.count != 2  else {
+        if(self.latlng.count != 2){
             return 0.0
         }
         return self.latlng[0]
     }
     
     func lng() -> Double {
-        guard self.latlng.count != 2  else {
+        if(self.latlng.count != 2){
             return 0.0
         }
         return self.latlng[1]
