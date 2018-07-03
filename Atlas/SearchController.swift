@@ -7,15 +7,21 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
-class SearchController: UIViewController {
+class SearchController: UIViewController, UITableViewDelegate {
 
     let searchController = UISearchController(searchResultsController: nil)
     
-    @IBOutlet var tableView: CountriesTableView!
+    @IBOutlet var tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
+        self.tableView.delegate = self
+        
         self.navigationController?.navigationBar.topItem?.title = "Search"
         
         searchController.searchResultsUpdater = self
@@ -26,11 +32,8 @@ class SearchController: UIViewController {
         
         searchController.searchBar.delegate = self
         searchController.searchBar.placeholder = "Search"
-        
-        self.tableView.parentController = self
-        
+                
         self.tableView.tableHeaderView = searchController.searchBar
-
     }
     
     func searchBarIsEmpty() -> Bool {
@@ -38,12 +41,22 @@ class SearchController: UIViewController {
     }
     
     func filterContentForSearchText(_ searchText: String, scope: String = "All") {
-        self.tableView.setParams(list: Atlas.shared().countriesByName(name: searchText))
+        self.tableView.dataSource = nil
+        Atlas.shared().countriesByName(name: searchText).bind(to: self.tableView.rx.items) { tableView, row, country in
+            let cell = self.tableView.dequeueReusableCell(withIdentifier: "CountryCell") as! CountryCell
+            cell.setParams(country: country)
+            return cell
+        }
         self.tableView.reloadData()
     }
     
     func isFiltering() -> Bool {
         return searchController.isActive && !searchBarIsEmpty()
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let cell = tableView.cellForRow(at: indexPath) as! CountryCell
+        self.showCountryCountroller(country: cell.country)
     }
 }
 
