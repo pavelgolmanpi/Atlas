@@ -9,37 +9,40 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import RxDataSources
 
 import struct Foundation.URL
 import class Foundation.URLSession
 
 class RegionsController: UITableViewController {
     
+    fileprivate let disposeBag = DisposeBag()
+    
+    let dataSource = RxTableViewSectionedReloadDataSource<SectionOfRegion>(configureCell: {
+        (ds: TableViewSectionedDataSource<SectionOfRegion>, tableView: UITableView, indexPath: IndexPath, model: Region) -> UITableViewCell in
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "RegionCell")
+        cell?.textLabel!.text = model.name
+        return cell!
+    })
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.tableView!.dataSource = nil
         self.navigationController?.navigationBar.topItem?.title = "Regions"
         
-        Atlas.shared()
-            .regions()
-            .bind(to: self.tableView.rx.items) { tableView, row, region in
-                let cell = tableView.dequeueReusableCell(withIdentifier: "RegionCell")!
-                cell.textLabel!.text = region
-                cell.accessoryType = .disclosureIndicator
-                return cell
-            }
-    }
-
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let currentCell = tableView.cellForRow(at: indexPath) as UITableViewCell?
-
-        let countriesView  = UIStoryboard(name: "Main", bundle:nil).instantiateViewController(withIdentifier: "CountriesController") as! CountriesController
+        self.tableView!.dataSource = nil
         
-        countriesView.setRegionName(name: (currentCell?.textLabel?.text)!)
+        Atlas.shared().regions()
+            .bind(to: self.tableView.rx.items(dataSource: dataSource))
+            .disposed(by: disposeBag)
         
-        self.navigationController?.pushViewController(countriesView, animated: true)
+        self.tableView.rx.modelSelected(Region.self)
+            .subscribe(onNext: { [weak self] item in
+                let countriesView  = UIStoryboard(name: "Main", bundle:nil).instantiateViewController(withIdentifier: "CountriesController") as! CountriesController
+                countriesView.setRegionName(name: item.name)
+                self?.navigationController?.pushViewController(countriesView, animated: true)
+            }).disposed(by: disposeBag)
     }
-
-
 }
 

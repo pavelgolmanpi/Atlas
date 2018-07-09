@@ -9,22 +9,29 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import RxDataSources
 
 class CountriesController: UITableViewController {
     
+    fileprivate let disposeBag = DisposeBag()
+    
     override func viewDidLoad() {
         self.tableView.delegate = self
+        self.tableView.dataSource = nil
+        
+        self.tableView.rx.modelSelected(Country.self)
+            .subscribe(onNext: { [weak self] item in
+                self?.showCountryCountroller(country: item)
+            }).disposed(by: disposeBag)
     }
     
     func setRegionName(name: String){
         self.title = name
-        self.tableView.setCountries(countries: Atlas.shared().countriesByRegion(region: self.title!))        
+        Atlas.shared().countriesByRegion(region: name)
+            .bind(to: self.tableView.rx.items(dataSource: self.countryDataSource()))
+            .disposed(by: disposeBag)
     }
-    
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.didSelectCountry(tableView: tableView, indexPath: indexPath)
-    }
-    
+
 }
 
 

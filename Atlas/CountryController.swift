@@ -14,6 +14,7 @@ import MapKit
 class CountryController: UIViewController, UITableViewDelegate{
     
     var country: Country!
+    fileprivate let disposeBag = DisposeBag()
     
     @IBOutlet weak var flag: UIImageView!
     @IBOutlet weak var name: UILabel!
@@ -43,12 +44,16 @@ class CountryController: UIViewController, UITableViewDelegate{
         let region = MKCoordinateRegion(center: coordinate, span: MKCoordinateSpan(latitudeDelta: 10, longitudeDelta: 10))
         self.mapView.setRegion(region, animated: true)
         
-        self.tableView.setCountries(countries: Atlas.shared().countryByAlpha3Code(codes: country.borders))
+        Atlas.shared().countryByAlpha3Code(codes: country.borders)
+            .bind(to: self.tableView.rx.items(dataSource: self.countryDataSource()))
+            .disposed(by: disposeBag)
+        
+        self.tableView.rx.modelSelected(Country.self)
+            .subscribe(onNext: { [weak self] item in
+                self?.showCountryCountroller(country: item)
+            }).disposed(by: disposeBag)
     }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.didSelectCountry(tableView: tableView, indexPath: indexPath)
-    }
+
 }
 
 

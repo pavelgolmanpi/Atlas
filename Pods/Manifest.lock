@@ -1,5 +1,10 @@
 PODS:
+  - Differentiator (3.0.2)
   - RxCocoa (4.1.2):
+    - RxSwift (~> 4.0)
+  - RxDataSources (3.0.2):
+    - Differentiator (~> 3.0)
+    - RxCocoa (~> 4.0)
     - RxSwift (~> 4.0)
   - RxSwift (4.1.2)
   - SDWebImage (4.3.3):
@@ -8,20 +13,25 @@ PODS:
 
 DEPENDENCIES:
   - RxCocoa (~> 4.0)
+  - RxDataSources
   - RxSwift (~> 4.0)
   - SDWebImage
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
+    - Differentiator
     - RxCocoa
+    - RxDataSources
     - RxSwift
     - SDWebImage
 
 SPEC CHECKSUMS:
+  Differentiator: a87be69eba49ec4ab460c7671143ee3a9eececfd
   RxCocoa: d88ba0f1f6abf040011a9eb4b539324fc426843a
+  RxDataSources: cb7c31e652a87ebb919da45f716bbb87b3765f6b
   RxSwift: e49536837d9901277638493ea537394d4b55f570
   SDWebImage: de4d90b5bff3571eae7bd16202b1f43135409fa5
 
-PODFILE CHECKSUM: cc983de12de6469830870eafac2c0ac101db6afb
+PODFILE CHECKSUM: f1488622b0b2a7c7c7c99729e3e9a4a6ac20d6b6
 
 COCOAPODS: 1.5.2
