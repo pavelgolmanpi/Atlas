@@ -13,23 +13,9 @@ import RxDataSources
 
 class CountriesController: UITableViewController {
     
-    fileprivate let disposeBag = DisposeBag()
-    
-    override func viewDidLoad() {
-        self.tableView.delegate = self
-        self.tableView.dataSource = nil
-        
-        self.tableView.rx.modelSelected(Country.self)
-            .subscribe(onNext: { [weak self] item in
-                self?.showCountryCountroller(country: item)
-            }).disposed(by: disposeBag)
-    }
-    
-    func setRegionName(name: String){
-        self.title = name
-        Atlas.shared().countriesByRegion(region: name)
-            .bind(to: self.tableView.rx.items(dataSource: self.countryDataSource()))
-            .disposed(by: disposeBag)
+    func setRegion(region: Region){
+        self.title = region.name
+        self.bindCountriesToTable(tableView: self.tableView, countries: Atlas.shared().countriesByRegion(region: region.name))
     }
 
 }

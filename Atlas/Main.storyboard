@@ -115,6 +115,9 @@
                         </connections>
                     </tableView>
                     <tabBarItem key="tabBarItem" title="Regions" image="globe.png" selectedImage="globe.png" id="WW7-HP-0of"/>
+                    <connections>
+                        <segue destination="Zah-0c-aTc" kind="show" identifier="ShowCountries" id="wfk-AO-no6"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ryf-hv-pRR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -322,6 +325,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="gG2-a0-Ht0"/>
                     </view>
+                    <navigationItem key="navigationItem" id="1up-6Z-tI8"/>
                     <connections>
                         <outlet property="flag" destination="rjZ-V5-vhu" id="wGb-W1-MKT"/>
                         <outlet property="labelBordersWith" destination="PPe-NQ-tRR" id="Ym5-EK-YiP"/>
@@ -333,7 +337,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bH6-x4-tav" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2440.8000000000002" y="-317.09145427286359"/>
+            <point key="canvasLocation" x="2785" y="-317"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="ek4-w9-Rb2">

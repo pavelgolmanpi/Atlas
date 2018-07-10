@@ -25,7 +25,15 @@ class RegionsController: UITableViewController {
         cell?.textLabel!.text = model.name
         return cell!
     })
-
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?){
+        if segue.identifier == "ShowCountries"
+        {
+            if let countriesVC = segue.destination as? CountriesController {
+                countriesVC.setRegion(region: sender as! Region)
+            }
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,15 +41,13 @@ class RegionsController: UITableViewController {
         
         self.tableView!.dataSource = nil
         
-        Atlas.shared().regions()
+        Atlas.shared().regions
             .bind(to: self.tableView.rx.items(dataSource: dataSource))
             .disposed(by: disposeBag)
         
         self.tableView.rx.modelSelected(Region.self)
             .subscribe(onNext: { [weak self] item in
-                let countriesView  = UIStoryboard(name: "Main", bundle:nil).instantiateViewController(withIdentifier: "CountriesController") as! CountriesController
-                countriesView.setRegionName(name: item.name)
-                self?.navigationController?.pushViewController(countriesView, animated: true)
+                self?.performSegue(withIdentifier: "ShowCountries", sender: item)
             }).disposed(by: disposeBag)
     }
 }

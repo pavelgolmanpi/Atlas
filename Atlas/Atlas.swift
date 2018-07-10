@@ -11,14 +11,8 @@ import RxSwift
 import RxCocoa
 
 class Atlas{
-    private var countries: BehaviorRelay<[Country]> = BehaviorRelay(value: [])
-    private var countriesObservable: Observable<[Country]> = Observable.from([])
-    
-    private var regs: BehaviorRelay<[SectionOfRegion]> = BehaviorRelay(value: [])
-    private var regsObservable: Observable<[SectionOfRegion]> = Observable.from([])
-    
-    public var ctrs: BehaviorRelay<[SectionOfCountry]> = BehaviorRelay(value: [])
-    public var ctrsObservable: Observable<[SectionOfCountry]> = Observable.from([])
+    private(set) var regions: BehaviorRelay<[SectionOfRegion]> = BehaviorRelay(value: [])
+    private var regionsObservable: Observable<[SectionOfRegion]> = Observable.from([])
     
     private var allCountries: [Country] = []
     
@@ -34,10 +28,7 @@ class Atlas{
     }
     
     func load(){
-        self.countriesObservable = self.countries.asObservable()
-        
-        self.regsObservable = self.regs.asObservable()
-        self.ctrsObservable = self.ctrs.asObservable()
+        self.regionsObservable = self.regions.asObservable()
         
         guard let gitUrl = URL(string: "https://restcountries.eu/rest/v2/all") else { return }
         URLSession.shared.dataTask(with: gitUrl) { (data, response
@@ -49,17 +40,11 @@ class Atlas{
                 
                 self.allCountries = items.filter { $0.region != "" }
                 
-                self.countries.accept(self.allCountries)
-                self.ctrs.accept([SectionOfCountry(header: "", items: self.allCountries)])
-                self.regs.accept([SectionOfRegion(header: "", items: NSSet(array: self.allCountries.map{ $0.region }).map{ region in Region(name: region as! String) })])
+                self.regions.accept([SectionOfRegion(header: "", items: NSSet(array: self.allCountries.map{ $0.region }).map{ region in Region(name: region as! String) })])
             } catch let err {
                 print("Err", err)
             }
             }.resume()
-    }
-    
-    func regions() -> Observable<[SectionOfRegion]>{
-        return self.regsObservable
     }
     
     func countriesByRegion(region: String) -> Observable<[SectionOfCountry]>{

@@ -13,7 +13,6 @@ import RxCocoa
 class SearchController: UIViewController, UITableViewDelegate {
 
     let searchController = UISearchController(searchResultsController: nil)
-    fileprivate let disposeBag = DisposeBag()
     
     @IBOutlet var tableView: UITableView!
     
@@ -34,11 +33,6 @@ class SearchController: UIViewController, UITableViewDelegate {
         searchController.searchBar.placeholder = "Search"
                 
         self.tableView.tableHeaderView = searchController.searchBar
-        
-        self.tableView.rx.modelSelected(Country.self)
-            .subscribe(onNext: { [weak self] item in
-                self?.showCountryCountroller(country: item)
-            }).disposed(by: disposeBag)
     }
     
     func searchBarIsEmpty() -> Bool {
@@ -46,11 +40,7 @@ class SearchController: UIViewController, UITableViewDelegate {
     }
     
     func filterContentForSearchText(_ searchText: String, scope: String = "All") {
-        self.tableView.dataSource = nil
-        Atlas.shared().countriesByName(name: searchText)
-            .bind(to: self.tableView.rx.items(dataSource: self.countryDataSource()))
-            .disposed(by: disposeBag)
-        
+        self.bindCountriesToTable(tableView: self.tableView, countries: Atlas.shared().countriesByName(name: searchText))
         self.tableView.reloadData()
     }
     

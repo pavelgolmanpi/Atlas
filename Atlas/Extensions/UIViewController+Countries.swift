@@ -11,21 +11,41 @@ import RxSwift
 import RxCocoa
 import RxDataSources
 
-extension UIViewController {
+private var countryDisposeBagKey: UInt8 = 0
 
-    func countryDataSource() -> RxTableViewSectionedReloadDataSource<SectionOfCountry>{
-        return RxTableViewSectionedReloadDataSource<SectionOfCountry>(configureCell: {
-            (ds: TableViewSectionedDataSource<SectionOfCountry>, tableView: UITableView, indexPath: IndexPath, country: Country) -> UITableViewCell in
-            
-            let cell = tableView.dequeueReusableCell(withIdentifier: "CountryCell") as! CountryCell
-            cell.setParams(country: country)
-            return cell
-        })
+extension UIViewController {
+    
+    var countryDisposeBag: DisposeBag {
+        get {
+            return associatedObject(base: self, key: &countryDisposeBagKey)
+            { return DisposeBag() }
+        }
+        set { associateObject(base: self, key: &countryDisposeBagKey, value: newValue) }
     }
     
-    func showCountryCountroller(country: Country){
-        let countryVC  = UIStoryboard(name: "Main", bundle:nil).instantiateViewController(withIdentifier: "CountryController") as! CountryController
-        countryVC.country = country
-        self.navigationController?.pushViewController(countryVC, animated: true)
+    func bindCountriesToTable(tableView: UITableView, countries: Observable<[SectionOfCountry]>){
+        tableView.dataSource = nil
+        
+        self.countryDisposeBag = DisposeBag()
+        tableView.rx.modelSelected(Country.self)
+            .subscribe(onNext: { [weak self] item in
+                let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "CountryController") as? CountryController
+                vc?.country = item
+                self?.navigationController?.pushViewController(vc!, animated: true)
+            })
+            .disposed(by: self.countryDisposeBag)
+                
+        countries
+            .bind(to: tableView.rx.items(dataSource: RxTableViewSectionedReloadDataSource<SectionOfCountry>(configureCell: {
+                (ds: TableViewSectionedDataSource<SectionOfCountry>, tableView: UITableView, indexPath: IndexPath, country: Country) -> UITableViewCell in
+                
+                let cell = tableView.dequeueReusableCell(withIdentifier: "CountryCell") as! CountryCell
+                cell.setParams(country: country)
+                return cell
+            })))
+            .disposed(by: self.countryDisposeBag)
     }
+    
+
+
 }
