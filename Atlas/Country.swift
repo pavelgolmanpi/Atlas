@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import MapKit
 
 struct Country: Codable{
     
@@ -15,6 +16,7 @@ struct Country: Codable{
     let alpha3Code: String
     let name: String
     let nativeName: String
+    let coord: CLLocationCoordinate2D
     let latlng: [Double]
     let borders: [String]
     
@@ -26,20 +28,37 @@ struct Country: Codable{
         case alpha3Code
         case borders
         case latlng
+        case coord
     }
     
-    func lat() -> Double {
-        if(self.latlng.count != 2){
-            return 0.0
+    public init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        region = try values.decode(String.self, forKey: .region)
+        name = try values.decode(String.self, forKey: .name)
+        nativeName = try values.decode(String.self, forKey: .nativeName)
+        alpha2Code = try values.decode(String.self, forKey: .alpha2Code)
+        alpha3Code = try values.decode(String.self, forKey: .alpha3Code)
+        borders = try values.decode([String].self, forKey: .borders)
+        latlng = try values.decode([Double].self, forKey: .latlng)
+        if(latlng.count >= 2){
+            coord = try values.decode(CLLocationCoordinate2D.self, forKey: .latlng)
+        }else{
+            coord = CLLocationCoordinate2D(latitude: 0.0, longitude: 0.0)
         }
-        return self.latlng[0]
     }
-    
-    func lng() -> Double {
-        if(self.latlng.count != 2){
-            return 0.0
-        }
-        return self.latlng[1]
-    }
+}
 
+extension CLLocationCoordinate2D: Codable {
+    
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.unkeyedContainer()
+        try container.encode(longitude)
+        try container.encode(latitude)
+    }
+    
+    public init(from decoder: Decoder) throws {
+        var container = try decoder.unkeyedContainer()
+        latitude = try container.decode(Double.self)
+        longitude = try container.decode(Double.self)
+    }
 }

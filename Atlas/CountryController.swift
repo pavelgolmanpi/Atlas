@@ -36,11 +36,10 @@ class CountryController: UIViewController, UITableViewDelegate{
         self.tableView.isHidden = self.labelBordersWith.isHidden
         
         let annotation = MKPointAnnotation()
-        let coordinate = CLLocationCoordinate2D(latitude: CLLocationDegrees(country.lat()), longitude: CLLocationDegrees(country.lng()))
-        annotation.coordinate = coordinate
+        annotation.coordinate = country.coord
         self.mapView.addAnnotation(annotation)
         
-        let region = MKCoordinateRegion(center: coordinate, span: MKCoordinateSpan(latitudeDelta: 10, longitudeDelta: 10))
+        let region = MKCoordinateRegion(center: country.coord, span: MKCoordinateSpan(latitudeDelta: 10, longitudeDelta: 10))
         self.mapView.setRegion(region, animated: true)
         
         self.bindCountriesToTable(tableView: self.tableView, countries: Atlas.shared().countryByAlpha3Code(codes: country.borders))
